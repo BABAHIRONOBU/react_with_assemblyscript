@@ -4,14 +4,15 @@ import {
   Dispatch,
   createContext,
 } from 'react';
-import { IWasm, WasmAction } from './wasm.type';
+import { WasmState } from './wasm.state';
+import { WasmAction } from './wasm.action';
 
-export type WasmContext = {
-  wasm: IWasm;
+type WasmContext = {
+  wasm: WasmState;
   dispatchWasm: Dispatch<WasmAction>
 };
 
-const defaultValue: WasmContext = {
+const defaultWasmContext: WasmContext = {
   wasm: {
     source: null,
     loaded: false,
@@ -19,4 +20,4 @@ const defaultValue: WasmContext = {
   dispatchWasm: () => {},
 };
 
-export const wasmContext = createContext<WasmContext>(defaultValue);
+export const wasmContext = createContext<WasmContext>(defaultWasmContext);

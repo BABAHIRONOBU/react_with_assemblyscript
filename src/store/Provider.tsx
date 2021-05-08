@@ -1,19 +1,23 @@
-// provider
-
-import React, { useReducer, useEffect } from 'react';
+import React, {
+  ReactNode,
+  useReducer,
+  useEffect,
+} from 'react';
 import loader from '@assemblyscript/loader';
-import { ProviderProp } from '../common';
-import { wasmContext } from './wasm.context';
-import { wasmReducer } from './wasm.reducer';
-import { IWasm } from './wasm.type';
-import { setSource, completeLoading } from './wasm.action';
+import {
+  wasmReducer,
+  initialWasm,
+  setSource,
+  completeLoading,
+  wasmContext,
+} from './wasm';
 
+type ProviderProp = {
+  children: ReactNode;
+};
+
+// [wasm START]
 function WasmProvider({ children }: ProviderProp) {
-  const initialWasm: IWasm = {
-    source: null,
-    loaded: false,
-  };
-
   const [wasm, dispatchWasm] = useReducer(wasmReducer, initialWasm);
 
   // TODO: store에서 thunk를 정의하는 방법 => 여기서 fetch하지 않고 store 내에서 하고 싶다...
@@ -39,5 +43,14 @@ function WasmProvider({ children }: ProviderProp) {
     </wasmContext.Provider>
   );
 }
+// [wasm END]
 
-export default WasmProvider;
+function Provider({ children }: ProviderProp) {
+  return (
+    <WasmProvider>
+      {children}
+    </WasmProvider>
+  );
+}
+
+export default Provider;

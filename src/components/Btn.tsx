@@ -1,8 +1,10 @@
-import React from 'react';
-import { useWasmStore } from '../store/wasm/wasm.hook';
+import React, { useContext } from 'react';
+import {
+  wasmContext,
+} from '../store/wasm';
 
 function Btn() {
-  const { wasm: { source, loaded } } = useWasmStore();
+  const { wasm: { source, loaded } } = useContext(wasmContext);
 
   const runWasm = () => {
     if (source) {

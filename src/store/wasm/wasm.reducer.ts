@@ -1,15 +1,15 @@
-// hook
+// reducer
 
 import { Reducer } from 'react';
+import { WasmState } from './wasm.state';
 import {
-  IWasm,
   WasmAction,
   SET_SOURCE,
   COMPLETE_LOADING,
   START_LOADING,
-} from './wasm.type';
+} from './wasm.action';
 
-export const wasmReducer: Reducer<IWasm, WasmAction> = (prevWasm, action) => {
+export const wasmReducer: Reducer<WasmState, WasmAction> = (prevWasm, action) => {
   switch (action.type) {
     case SET_SOURCE:
       return {
